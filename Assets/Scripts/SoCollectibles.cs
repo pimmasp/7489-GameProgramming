@@ -11,7 +11,6 @@ public class SoCollectibles : ScriptableObject
     [SerializeField] private bool Respawnable;
     public string GetCollectible()
     {
-        Destroy(this);
         return collectibleName;
     }
 }

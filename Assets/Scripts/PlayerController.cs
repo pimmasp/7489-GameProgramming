@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckDisance = 0.01f;
     private bool _isGrounded;
     private float _moveInput;
+    private float coyoTime = 0.15f;
+    private float coyoTimeCounter;
     private GameManager _gameManager;
     // private void Start() 
     // {
@@ -119,6 +121,15 @@ public class PlayerController : MonoBehaviour
             groundLayers);
 
         _isGrounded = raycastHit.collider != null;
+
+        if (_isGrounded)
+        {
+            coyoTimeCounter = coyoTime;
+        }
+        else
+        {
+            coyoTimeCounter  -= Time.deltaTime;
+        }
 
         /*Color rayColor;
 

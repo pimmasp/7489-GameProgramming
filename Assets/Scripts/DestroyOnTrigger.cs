@@ -11,7 +11,7 @@ public class DestroyOnTrigger : MonoBehaviour
         if(other.gameObject.tag == "Player")
             Destroy(gameObject);
             other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPadForce, ForceMode2D.Impulse);
-
+        
             StartCoroutine(RespawnCollectible());
     }
     private IEnumerator RespawnCollectible()
