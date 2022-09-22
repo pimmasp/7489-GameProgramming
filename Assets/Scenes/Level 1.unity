@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 122245637}
   - component: {fileID: 122245636}
   - component: {fileID: 122245638}
+  - component: {fileID: 122245639}
   m_Layer: 7
   m_Name: Hurt
   m_TagString: Untagged
@@ -192,6 +193,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aae297a39e3fe554093545633a3ca843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &122245639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122245635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f6e62b9084661409454ee2945aa69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &158387103
@@ -981,7 +994,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820acc9b3b0d810418fa5974cd301b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPadForce: 7
+  jumpPadForce: 5
+  OnEnableItem: {fileID: 897141294}
 --- !u!61 &897141299
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7926,7 +7940,6 @@ GameObject:
   - component: {fileID: 1502412902}
   - component: {fileID: 1502412904}
   - component: {fileID: 1502412903}
-  - component: {fileID: 1502412905}
   m_Layer: 0
   m_Name: Finish
   m_TagString: Finish
@@ -7985,18 +7998,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5dfe45774ff162b468aca9228efee410, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1502412905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1502412901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17f6e62b9084661409454ee2945aa69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1633634854

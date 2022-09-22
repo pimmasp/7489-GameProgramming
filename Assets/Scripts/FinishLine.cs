@@ -20,8 +20,8 @@ public class FinishLine : MonoBehaviour
         if (!other.CompareTag("Player")) return;
         
         FindGameManager();
-        _gameManager.TriggerNextScene();
-
+        _gameManager.LoadNextScene();
+        //โจทย์ไม่ได้บอกต้องรอ2วิ
 
     }
 }

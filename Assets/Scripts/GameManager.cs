@@ -28,12 +28,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(GetCurrentSceneIndex());
     }
 
-    public void TriggerNextScene()
-    {
-        StartCoroutine(LoadNextScene());
-    }
+    // public void TriggerNextScene()
+    // {
+    //     StartCoroutine(LoadNextScene());
+    // }
 
-    private IEnumerator LoadNextScene()
+    public void LoadNextScene()
     {
         var nextSceneBuildIndex = GetCurrentSceneIndex() + 1;
         if (nextSceneBuildIndex == SceneManager.sceneCountInBuildSettings)
@@ -41,14 +41,10 @@ public class GameManager : MonoBehaviour
             nextSceneBuildIndex = 0;
         }
 
-        yield return new WaitForSeconds(2f);
+        // yield return new WaitForSeconds(2f);
 
         SceneManager.LoadScene(nextSceneBuildIndex);
 
-    }
-    private IEnumerator RespawnCollectible()
-    {
-        yield return new WaitForSeconds(4f);
     }
 
     private int GetCurrentSceneIndex()

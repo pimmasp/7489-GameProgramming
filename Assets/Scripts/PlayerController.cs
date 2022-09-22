@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     {
         CheckGround();
         SetAnimatorParameter();
+        coyoTimeCounter -= Time.deltaTime;
     }
 
     private void SetAnimatorParameter()
@@ -81,13 +82,11 @@ public class PlayerController : MonoBehaviour
     private void TryJumping()
     {
         if (! _isGrounded) return;
-
         Jump(jumpForce);
     }
     private void OnJump(InputValue value)
     {
-        if (!value.isPressed) return;
-
+        if (!value.isPressed && coyoTimeCounter > 0 ) return;
         TryJumping();
     }
     private void Jump(float force)
