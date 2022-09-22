@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 public class PlayerController : MonoBehaviour
 {
     [Header("Component References")]
@@ -52,7 +54,10 @@ public class PlayerController : MonoBehaviour
     {
         CheckGround();
         SetAnimatorParameter();
-        coyoTimeCounter -= Time.deltaTime;
+        // Debug.Log(_isGrounded);
+        coyo();
+        Debug.Log(coyoTimeCounter);
+
     }
 
     private void SetAnimatorParameter()
@@ -79,15 +84,18 @@ public class PlayerController : MonoBehaviour
         FlipPlayerSprite();
     }
 
+    private void OnJump(InputValue value)
+    {
+        if (!value.isPressed && coyoTimeCounter < 0f ) return;
+        
+        TryJumping();
+        StartCoroutine(CoyoDelay());
+    }
     private void TryJumping()
     {
         if (! _isGrounded) return;
+        
         Jump(jumpForce);
-    }
-    private void OnJump(InputValue value)
-    {
-        if (!value.isPressed && coyoTimeCounter > 0 ) return;
-        TryJumping();
     }
     private void Jump(float force)
     {
@@ -121,14 +129,13 @@ public class PlayerController : MonoBehaviour
 
         _isGrounded = raycastHit.collider != null;
 
-        if (_isGrounded)
-        {
-            coyoTimeCounter = coyoTime;
-        }
-        else
-        {
-            coyoTimeCounter  -= Time.deltaTime;
-        }
+            
+
+
+        // else
+        // {
+        //     coyoTimeCounter  -= Time.deltaTime;
+        // }
 
         /*Color rayColor;
 
@@ -143,6 +150,25 @@ public class PlayerController : MonoBehaviour
 
         Debug.DrawRay(playerCollider.bounds.center, Vector2.down * (playerCollider.bounds.extents.y + groundCheckDisance), rayColor);
         Debug.Log(_isGrounded);*/
+    }
+
+    private void coyo()
+    {
+        if (_isGrounded)
+        {
+            coyoTimeCounter = coyoTime;
+        }
+        else
+        {
+            coyoTimeCounter  -= Time.deltaTime;
+        }
+
+    }
+
+    private IEnumerator CoyoDelay()
+    {
+        yield return new WaitForSeconds(0.05f);
+        coyoTimeCounter = 0f;
     }
 }
 
