@@ -86,14 +86,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump(InputValue value)
     {
-        if (!value.isPressed && coyoTimeCounter < 0f ) return;
+        if (!value.isPressed) return;
         
         TryJumping();
-        StartCoroutine(CoyoDelay());
+        coyoTimeCounter = 0f;
+        // StartCoroutine(CoyoDelay());
     }
     private void TryJumping()
     {
-        if (! _isGrounded) return;
+        if (! _isGrounded && coyoTimeCounter < 0f) return;
         
         Jump(jumpForce);
     }
@@ -165,10 +166,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private IEnumerator CoyoDelay()
-    {
-        yield return new WaitForSeconds(0.05f);
-        coyoTimeCounter = 0f;
-    }
+    // private IEnumerator CoyoDelay()
+    // {
+    //     yield return new WaitForSeconds(0.05f);
+    //     coyoTimeCounter = 0f;
+    // }
 }
 
