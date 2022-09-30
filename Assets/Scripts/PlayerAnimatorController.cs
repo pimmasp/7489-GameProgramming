@@ -3,11 +3,15 @@ using UnityEngine;
 public class PlayerAnimatorController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    
+    private static readonly int IsGrounded = Animator.StringToHash("isGrounded");
+    private static readonly int XVelocity = Animator.StringToHash("xVelocity");
+    private static readonly int YVelocity = Animator.StringToHash("yVelocity");
 
-    public void SetAnimatorParameter(Vector2 playerVelcoty, bool groundState)
+    public void SetAnimatorParameters(Vector2 playerVelocity, bool groundState)
     {
-        animator.SetFloat("xVelocity", Mathf.Abs(playerVelcoty.x));
-        animator.SetFloat("yVelocity", playerVelcoty.y);
-        animator.SetBool("IsGrounded", groundState);
+        animator.SetBool(IsGrounded, groundState);
+        animator.SetFloat(XVelocity, Mathf.Abs(playerVelocity.x));
+        animator.SetFloat(YVelocity, playerVelocity.y);
     }
 }

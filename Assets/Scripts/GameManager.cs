@@ -1,14 +1,23 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private void Awake() 
-    {
-        var numGameManagers = FindObjectsOfType<GameManager>().Length;
+    // Simple singleton script. This is the easiest way to create and understand a singleton script.
+    [SerializeField] private float roundTime = 30f;
+    [SerializeField] private ScoreDisplay scoreDisplay;
+    [SerializeField] private TimerBar timerBar;
+    [SerializeField] [ReadonlyInspector] private float roundTimer = 0;
+    [SerializeField] [ReadonlyInspector] private int score = 0;
 
-        if (numGameManagers > 1)
+    private bool _isGameOver;    
+    
+    
+    private void Awake()
+    {
+        var numGameManager = FindObjectsOfType<GameManager>().Length;
+
+        if (numGameManager > 1)
         {
             Destroy(gameObject);
         }
@@ -16,39 +25,68 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+
+        UpdateScore();
+
     }
 
     public void ProcessPlayerDeath()
     {
-        RestartScene();
+        SceneManager.LoadScene(GetCurrentBuildIndex());
     }
 
-    public void RestartScene()
+    public void LoadNextLevel()
     {
-        SceneManager.LoadScene(GetCurrentSceneIndex());
-    }
-
-    // public void TriggerNextScene()
-    // {
-    //     StartCoroutine(LoadNextScene());
-    // }
-
-    public void LoadNextScene()
-    {
-        var nextSceneBuildIndex = GetCurrentSceneIndex() + 1;
-        if (nextSceneBuildIndex == SceneManager.sceneCountInBuildSettings)
+        var nextSceneIndex = GetCurrentBuildIndex() + 1;
+        
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
         {
-            nextSceneBuildIndex = 0;
+            nextSceneIndex = 0;
         }
-
-        // yield return new WaitForSeconds(2f);
-
-        SceneManager.LoadScene(nextSceneBuildIndex);
-
+        
+        SceneManager.LoadScene(nextSceneIndex);
     }
 
-    private int GetCurrentSceneIndex()
+    private int GetCurrentBuildIndex()
     {
         return SceneManager.GetActiveScene().buildIndex;
     }
-}
+    
+    private void Update()
+    {
+        ProcessRoundTimer();
+    }
+
+
+    private void ProcessRoundTimer()
+    {
+        roundTimer = Mathf.Max(0f, roundTimer - Time.deltaTime);
+        timerBar.ProcessTimer(roundTimer, roundTime);
+
+        if (roundTimer > 0) return;
+
+        if (_isGameOver) return;
+        
+        RestartGame();
+    }
+    
+    private void RestartGame()
+    {
+        score = 0;
+        UpdateScore();
+        roundTimer = roundTime;
+        _isGameOver = false;
+    }
+    
+    public void AddScore()
+    {
+        score += 1;
+        UpdateScore();
+    }
+
+    private void UpdateScore()
+    {
+        scoreDisplay.UpdateScore(score);
+    }
+    
+    }

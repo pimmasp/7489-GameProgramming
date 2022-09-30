@@ -6,9 +6,9 @@ public class RandomCollectibles : MonoBehaviour
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    private Collectibles _collectible;
+    /*private Collectibles _collectible;
 
-    /*private void Awake()
+    private void Awake()
     {
         // What is awake? It is Start() but runs before anything else. For more info, please check the Script Execution Order.
         

@@ -1,8 +1,7 @@
 public enum CollectibleType
 {
-    DoubleJumpe,
-    RefillHelth,
+    RefillHealth,
     RefillEnergy,
     RefillDash,
-
+    DoubleJump,
 }
