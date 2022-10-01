@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] [ReadonlyInspector] private int score = 0;
 
     private bool _isGameOver;    
+    private Health _health;
     
     
     private void Awake()
@@ -30,8 +31,15 @@ public class GameManager : MonoBehaviour
 
     }
 
+    // public void TakeDamage3
+    // {
+
+    // }
+
     public void ProcessPlayerDeath()
     {
+        // _health.TakeDamage2(1);
+
         SceneManager.LoadScene(GetCurrentBuildIndex());
     }
 

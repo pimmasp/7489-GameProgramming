@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayers;
     [SerializeField] private float extraGroundCheckDistance = 0.5f;
     // public float currentHealth { get; private set; }
-    // private Health _health;
+    private Health _health;
 
     // Input Values
     private float _moveInput;
@@ -52,6 +52,11 @@ public class PlayerController : MonoBehaviour
         CheckGround();
         CheckCanJump();
         SetAnimatorParameters();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene(0);
+
+
 
         // if (Input.GetKeyDown(KeyCode.E))
         //     TakeDamage2(1);
@@ -163,8 +168,6 @@ public class PlayerController : MonoBehaviour
     
     public void TakeDamage()
     {
-        // _health.TakeDamage2(1);
-
         _gameManager.ProcessPlayerDeath();
     }
 

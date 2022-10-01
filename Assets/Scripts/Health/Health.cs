@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
         currentHealth = startingHealth;
         Debug.Log(startingHealth);
         Debug.Log(currentHealth);
+
     }
     public void TakeDamage2(float damge)
     {
@@ -40,4 +41,6 @@ public class Health : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
             TakeDamage2(1);
     }
+
+
 }
