@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 public class PlayerController : MonoBehaviour
 {
     [Header("Component References")] 
@@ -25,8 +26,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayers;
     [SerializeField] private float extraGroundCheckDistance = 0.5f;
     // public float currentHealth { get; private set; }
-    private Health _health;
-
+    // private Health _health;
+    
+    public float playerhealth = 3f;
     // Input Values
     private float _moveInput;
     
@@ -52,9 +54,6 @@ public class PlayerController : MonoBehaviour
         CheckGround();
         CheckCanJump();
         SetAnimatorParameters();
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene(0);
 
 
 
@@ -168,8 +167,16 @@ public class PlayerController : MonoBehaviour
     
     public void TakeDamage()
     {
+        if (_gameManager == null)
+        {
+            _gameManager = FindObjectOfType<GameManager>();
+        }
         _gameManager.ProcessPlayerDeath();
+
+
     }
+
+    
 
 
     
@@ -190,7 +197,15 @@ public class PlayerController : MonoBehaviour
 
         TryJumping();
     }
+    private void OnQuit(InputValue value)
+    {
+        if (value.isPressed) 
+        {
+            SceneManager.LoadScene(0);
+        }
 
+    }
     #endregion
+
 
 }

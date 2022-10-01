@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
+using TMPro;
+using DG.Tweening;
 public class GameManager : MonoBehaviour
 {
     // Simple singleton script. This is the easiest way to create and understand a singleton script.
@@ -10,9 +12,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] [ReadonlyInspector] private float roundTimer = 0;
     [SerializeField] [ReadonlyInspector] private int score = 0;
 
+    public TextMeshProUGUI lifeText;
     private bool _isGameOver;    
-    private Health _health;
-    
+    // private Health _health;
+    public float playerHP = 3f;
     
     private void Awake()
     {
@@ -27,8 +30,13 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
-        UpdateScore();
+        // UpdateScore();
 
+    }
+
+    private void Start() 
+    {
+        lifeText = FindObjectOfType<TextMeshProUGUI>();
     }
 
     // public void TakeDamage3
@@ -39,8 +47,19 @@ public class GameManager : MonoBehaviour
     public void ProcessPlayerDeath()
     {
         // _health.TakeDamage2(1);
+        playerHP -= 1; 
+        if (playerHP >= 1)
+        {
+            SceneManager.LoadScene(GetCurrentBuildIndex());
+        }
+        else if (playerHP == 0)
+        {        
+            SceneManager.LoadScene(0);
+        }    
 
-        SceneManager.LoadScene(GetCurrentBuildIndex());
+        DOTween.KillAll();
+
+
     }
 
     public void LoadNextLevel()
@@ -49,10 +68,12 @@ public class GameManager : MonoBehaviour
         
         if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
         {
-            nextSceneIndex = 0;
+            nextSceneIndex = 1;
+
         }
         
         SceneManager.LoadScene(nextSceneIndex);
+        DOTween.KillAll();
     }
 
     private int GetCurrentBuildIndex()
@@ -62,39 +83,29 @@ public class GameManager : MonoBehaviour
     
     private void Update()
     {
-        ProcessRoundTimer();
+        lifeText.text = "Lives: " + playerHP;
+
+        if (GetCurrentBuildIndex() == 0)
+        {
+            playerHP = 3;
+            DOTween.KillAll();
+            Destroy(gameObject);
+        }
+        // ProcessRoundTimer();
     }
 
 
-    private void ProcessRoundTimer()
-    {
-        roundTimer = Mathf.Max(0f, roundTimer - Time.deltaTime);
-        timerBar.ProcessTimer(roundTimer, roundTime);
+    // private void ProcessRoundTimer()
+    // {
+    //     roundTimer = Mathf.Max(0f, roundTimer - Time.deltaTime);
+    //     timerBar.ProcessTimer(roundTimer, roundTime);
 
-        if (roundTimer > 0) return;
+    //     if (roundTimer > 0) return;
 
-        if (_isGameOver) return;
+    //     if (_isGameOver) return;
         
-        RestartGame();
-    }
+    //     RestartGame();
+    // }
     
-    private void RestartGame()
-    {
-        score = 0;
-        UpdateScore();
-        roundTimer = roundTime;
-        _isGameOver = false;
-    }
-    
-    public void AddScore()
-    {
-        score += 1;
-        UpdateScore();
-    }
-
-    private void UpdateScore()
-    {
-        scoreDisplay.UpdateScore(score);
-    }
     
     }

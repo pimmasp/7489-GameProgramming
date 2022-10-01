@@ -9,11 +9,11 @@ public class MainMenu : MonoBehaviour
     public AudioMixer audioMixer;
     public void LoadGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
     public void LoadGame2()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
     public void QiutGame()
     {
