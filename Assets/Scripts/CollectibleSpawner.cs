@@ -6,14 +6,21 @@ public class CollectibleSpawner : MonoBehaviour
     // This script is to handle the respawning of the collectible as a disabled gameObject cannot run any methods or coroutines on its own.
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private GameObject collectibleGameObject;
+    [SerializeField] private PlayerAudioController audioController;
     
     [Header("Collectible Settings")]
     [SerializeField] private float respawnTime = 4f;
 
+    private void Start()
+    {
+        spriteRenderer.enabled = false;
+    }
+    
     private IEnumerator RespawnCollectible()
     {
         yield return new WaitForSeconds(respawnTime);
         SetOutlineSpriteActive(false);
+        audioController.PlayRespawnCollect();
         collectibleGameObject.SetActive(true);
     }
 

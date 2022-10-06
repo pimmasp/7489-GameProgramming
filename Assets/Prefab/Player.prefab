@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8807623583782796307}
   - component: {fileID: 8807623583782796300}
   - component: {fileID: 8807623583782796303}
-  - component: {fileID: 7277686124400340821}
+  - component: {fileID: 2426209206803104710}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 8807623584165039417}
+  audioController: {fileID: 3562062983293680868}
 --- !u!61 &8807623583782796300
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -97,7 +98,7 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!82 &7277686124400340821
+--- !u!82 &2426209206803104710
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,8 +109,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 87f434dda92978e47ae41bc956c14d16, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.862
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -203,9 +204,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8807623584165039418}
   - component: {fileID: 8807623584165039416}
+  - component: {fileID: 3562062983293680868}
   - component: {fileID: 8807623584165039417}
   - component: {fileID: 8807623584165039423}
-  - component: {fileID: 8508639484283497822}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -258,6 +259,27 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3562062983293680868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807623584165039419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720a5a967f663394499318fb762513b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 2426209206803104710}
+  walkAudioClips: {fileID: 11400000, guid: dd4a3395b8cc3c14a930dbf3362b06ce, type: 2}
+  jumpAudioclips: {fileID: 11400000, guid: e24ae3e742470c94983964db2a13928a, type: 2}
+  dieAudioclips: {fileID: 11400000, guid: cac644cc9905b5849a750be670d9b923, type: 2}
+  respawnAudioclips: {fileID: 11400000, guid: ebd4173448414ad44a5b36e869ab096c, type: 2}
+  jumpPadAudioclips: {fileID: 11400000, guid: 7e6a73598a6ba6249834792e2dc4694e, type: 2}
+  respawnCollectAudioclips: {fileID: 11400000, guid: 231515a989a0b5b47a4a0368a6ba102b, type: 2}
+  winAudioclips: {fileID: 11400000, guid: 9bb0e2e28f839f9439c87a60c94bb25b, type: 2}
+  fallAudioclips: {fileID: 11400000, guid: 8df3f6beba823274db791457e3f514c0, type: 2}
 --- !u!114 &8807623584165039417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +296,7 @@ MonoBehaviour:
   rb: {fileID: 8807623583782796303}
   playerCollider: {fileID: 8807623583782796300}
   animatorController: {fileID: 8807623584165039423}
-  audioController: {fileID: 8508639484283497822}
+  audioController: {fileID: 3562062983293680868}
   movementSpeed: 5
   jumpForce: 8
   timeBetweenJumps: 0.1
@@ -296,21 +318,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8807623585611382188}
---- !u!114 &8508639484283497822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8807623584165039419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68a6cd19bc2d5854eb98b49f9f8e79b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 7277686124400340821}
-  walkAudioClips: {fileID: 11400000, guid: 787b3128d352af4439f2a760164161e2, type: 2}
-  jumpAudioclips: {fileID: 11400000, guid: ad69b270cfc8c904c938e725377199e4, type: 2}
 --- !u!1 &8807623585611382191
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,7 +329,7 @@ GameObject:
   - component: {fileID: 8807623585611382190}
   - component: {fileID: 8807623585611382189}
   - component: {fileID: 8807623585611382188}
-  - component: {fileID: 2924645820549843311}
+  - component: {fileID: 7751545610719915932}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -417,7 +424,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2924645820549843311
+--- !u!114 &7751545610719915932
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -426,7 +433,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8807623585611382191}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08977f91d23e419469381236b857c2bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ff128b96d5b2b443b60991bb85454ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioController: {fileID: 8508639484283497822}
+  audioController: {fileID: 3562062983293680868}

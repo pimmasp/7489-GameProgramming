@@ -8,4 +8,8 @@ public class PlayerAnimatorEvents : MonoBehaviour
     {
         audioController.PlayWalkSound();
     }
+    public void PlayFallSound()
+    {
+        audioController.PlayFallSound();
+    }
 }

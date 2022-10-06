@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,23 +10,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private PlayerAnimatorController animatorController;
     [SerializeField] private PlayerAudioController audioController;
-   
-   
-    // [SerializeField] private float startingHealth = 3f;
+
     [Header("Player Values")] 
     [SerializeField] private float movementSpeed = 3f;
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float timeBetweenJumps = 0.1f;
     [SerializeField] private float coyoteTimeDuration = 0.5f;
-    // [SerializeField] private float damage = 1f;
 
     [Header("Ground Checks")] 
     [SerializeField] private LayerMask groundLayers;
     [SerializeField] private float extraGroundCheckDistance = 0.5f;
-    // public float currentHealth { get; private set; }
-    // private Health _health;
     
-    public float playerhealth = 3f;
     // Input Values
     private float _moveInput;
     
@@ -44,43 +36,23 @@ public class PlayerController : MonoBehaviour
     // Stored References
     private GameManager _gameManager;
 
-    private void Start()
-    {
-
-        _gameManager = FindObjectOfType<GameManager>();
-    }
     private void Update()
     {
         CheckGround();
         CheckCanJump();
         SetAnimatorParameters();
-
-
-
-        // if (Input.GetKeyDown(KeyCode.E))
-        //     TakeDamage2(1);
     }
-    // public void TakeDamage2(float damage)
-    // {
-    //     currentHealth = currentHealth - damage;
-
-    //     if (currentHealth > 0)
-    //     {
-    //         Debug.Log(startingHealth);
-    //         Debug.Log(currentHealth);
-    //         _gameManager.ProcessPlayerDeath();
-    //     }
-    //     else
-    //     {
-    //         Debug.Log(startingHealth);
-    //         Debug.Log(currentHealth);
-    //         _gameManager.ProcessPlayerDeath();
-    //     }
-    // }
-
+    
     private void FixedUpdate()
     {
         Move();
+    }
+
+    private void FindGameManager()
+    {
+        if (_gameManager != null) return;
+        
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
     #region Actions
@@ -119,7 +91,7 @@ public class PlayerController : MonoBehaviour
         _canJump = false; // Flag bool canJump is here is to prevent double jumping on jump pads since the code is shared.
         _lastJumpTimer = 0f - additionalTimeWait;
         rb.velocity = new Vector2(rb.velocity.x, 0f); // Reset the y-force to prevent player stacking up jump momentum.
-        rb.AddForce(force * transform.up, ForceMode2D.Impulse);    
+        rb.AddForce(force * transform.up, ForceMode2D.Impulse);
     }
 
     private void CheckGround()
@@ -167,18 +139,10 @@ public class PlayerController : MonoBehaviour
     
     public void TakeDamage()
     {
-        if (_gameManager == null)
-        {
-            _gameManager = FindObjectOfType<GameManager>();
-        }
+        FindGameManager();
+        audioController.PlayDieSound();
         _gameManager.ProcessPlayerDeath();
-
-
     }
-
-    
-
-
     
     #endregion
     
@@ -197,15 +161,13 @@ public class PlayerController : MonoBehaviour
 
         TryJumping();
     }
+
     private void OnQuit(InputValue value)
     {
-        if (value.isPressed) 
-        {
-            SceneManager.LoadScene(0);
-        }
-
+        FindGameManager();
+        _gameManager.ReturnToMainMenu();
     }
+    
     #endregion
-
 
 }

@@ -4,9 +4,9 @@ public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private PlayerController playerController;
 
+    [SerializeField] private PlayerAudioController audioController;
+
     private Collider2D _playerCollider;
-    private GameManager _gameManager;
-    // private Health _health;
     private void Start()
     {
         _playerCollider = GetComponent<Collider2D>();
@@ -18,6 +18,7 @@ public class PlayerCollision : MonoBehaviour
         {
             playerController.Jump(jumpPad.GetJumpPadForce(), jumpPad.GetAdditionalSleepJumpTime());
             jumpPad.TriggerJumpPad();
+            audioController.PlayJumpPad();
         }
         else if (col.TryGetComponent(out Collectibles collectible))
         {
@@ -27,6 +28,7 @@ public class PlayerCollision : MonoBehaviour
             {
                 case CollectibleType.DoubleJump:
                     playerController.EnableDoubleJump();
+                    audioController.PlayRespawn();
                     break;
                 case CollectibleType.RefillHealth:
                 case CollectibleType.RefillEnergy:
@@ -40,14 +42,7 @@ public class PlayerCollision : MonoBehaviour
 
         if (_playerCollider.IsTouchingLayers(LayerMask.GetMask("Hazard")))
         {
-            if (_gameManager == null)
-            {
-                _gameManager = FindObjectOfType<GameManager>(); 
-            }
             playerController.TakeDamage();
-            
-            // _health.TakeDamage2(1);
-
         }
 
         #region Unused
