@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class FinishLine : MonoBehaviour
 {
+    [SerializeField] private SoAudioClips winAudioClips;
+    [SerializeField] private AudioPlayer audioPlayer;
+    [SerializeField] private ParticleSystem win;
     private const string PlayerTag = "Player";
-    [SerializeField] private PlayerAudioController audioController;
+
     private GameManager _gameManager;
 
     private bool _triggeredNextScene;
@@ -19,7 +22,8 @@ public class FinishLine : MonoBehaviour
 
         _triggeredNextScene = true;   // This is to prevent double scene loads.
         _gameManager = FindObjectOfType<GameManager>();
+        audioPlayer.PlaySound(winAudioClips);
+        win.Play();
         _gameManager.LoadNextLevel();
-        audioController.PlayWinSound();
     }
 }

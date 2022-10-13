@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ee640065cd37e940af6909f0171dbce, type: 3}
-  m_Name: Walk
+  m_Script: {fileID: 11500000, guid: 8fa0d64e2e4aa4a4bbde8d405433eec5, type: 3}
+  m_Name: PlayerWalk
   m_EditorClassIdentifier: 
   audioClips:
   - {fileID: 8300000, guid: 9d770c4225a1fa84282346426562af87, type: 3}

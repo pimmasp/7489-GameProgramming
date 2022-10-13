@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ee640065cd37e940af6909f0171dbce, type: 3}
-  m_Name: JumpPad
+  m_Script: {fileID: 11500000, guid: 8fa0d64e2e4aa4a4bbde8d405433eec5, type: 3}
+  m_Name: PlayerDeath
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 8300000, guid: 78cb2dc56315e8c4ab22d2a3c6ad054a, type: 3}
+  - {fileID: 8300000, guid: 16f8bedc305fd1f469d1905ff9d76d27, type: 3}

@@ -2,49 +2,35 @@ using UnityEngine;
 
 public class PlayerAudioController : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioPlayer audioPlayer;
+    
+    [Header("Audio Clips")]
     [SerializeField] private SoAudioClips walkAudioClips;
-    [SerializeField] private SoAudioClips jumpAudioclips;
-    [SerializeField] private SoAudioClips dieAudioclips;
-    [SerializeField] private SoAudioClips respawnAudioclips;
-    [SerializeField] private SoAudioClips jumpPadAudioclips;
-    [SerializeField] private SoAudioClips respawnCollectAudioclips;
-    [SerializeField] private SoAudioClips winAudioclips;
-    [SerializeField] private SoAudioClips fallAudioclips;
+    [SerializeField] private SoAudioClips jumpAudioClips;
+    [SerializeField] private SoAudioClips deathAudioClips;
 
-    public void PlayJumpSound() 
-    { //Lab5
-        audioSource.PlayOneShot(jumpAudioclips.GetAudioClip(), 0.5f);    
-    }
-    //พี่ไม่ได้ให้เสียงตกมาเลยใช้เสียงคล้ายตอนของรีใหม่นะคับ
-    public void PlayFallSound() 
+    public void PlayJump()
     {
-        audioSource.PlayOneShot(fallAudioclips.GetAudioClip(), 0.2f);    
-    }
-    public void PlayWalkSound()
-    {
-        audioSource.PlayOneShot(walkAudioClips.GetAudioClip(), 0.5f);    
+        audioPlayer.PlaySound(jumpAudioClips, 0.5f);
     }
 
-    public void PlayDieSound()
+    public void PlayWalk()
     {
-        audioSource.PlayOneShot(dieAudioclips.GetAudioClip());
-    }
-    public void PlayRespawn()
-    {
-        audioSource.PlayOneShot(respawnAudioclips.GetAudioClip());
-    }
-    public void PlayRespawnCollect()
-    {
-        audioSource.PlayOneShot(respawnCollectAudioclips.GetAudioClip());
-    }
-    public void PlayJumpPad()
-    {
-        audioSource.PlayOneShot(jumpPadAudioclips.GetAudioClip());
+        audioPlayer.PlaySound(walkAudioClips, 0.3f);
     }
 
-    public void PlayWinSound()
+    public void PlayFallImpact()
     {
-        audioSource.PlayOneShot(winAudioclips.GetAudioClip());
+        audioPlayer.PlaySound(walkAudioClips, 0.6f);
+    }
+
+    public void PlayDeath()
+    {
+        audioPlayer.PlaySound(deathAudioClips);
+    }
+    
+    public void MuteAudioSource()
+    {
+        audioPlayer.MuteAudioSource();
     }
 }
